@@ -6,6 +6,7 @@ import java.util.Map;
 import encore.ctrl.util.Controller;
 import encore.intro.ctrl.IndexCtrl;
 import encore.user.ctrl.LoginCtrl;
+import encore.user.ctrl.LogoutCtrl;
 
 
 
@@ -17,6 +18,8 @@ public class BeanFactory {
 		///////////////////////////////
 		map.put("/pjt/index.encore", new IndexCtrl()) ;
 		map.put("/pjt/login.encore", new LoginCtrl()) ;
+		map.put("/pjt/logout.encore", new LogoutCtrl()) ;
+		
 	}
 	public static BeanFactory getInstance() {
 		if(instance == null) {

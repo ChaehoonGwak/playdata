@@ -30,7 +30,7 @@ public class DispatcherServlet extends HttpServlet {
 		String uri = request.getRequestURI() ; 
 		System.out.println("client request : "+uri);
 		
-		// 팩토리를 통한 컨트롤로와 관계형성 및 화면 분기
+		// 팩토리를 통한 컨트롤러와 관계형성 및 화면 분기
 		BeanFactory factory = BeanFactory.getInstance() ; 
 		Controller ctrl = factory.getBean(uri) ; 
 		View view = ctrl.execute(request, response) ; 

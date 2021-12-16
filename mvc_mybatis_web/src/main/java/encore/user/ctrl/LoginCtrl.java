@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import encore.ctrl.util.Controller;
 import encore.ctrl.view.View;
@@ -25,12 +26,17 @@ public class LoginCtrl implements Controller{
 		String id= request.getParameter("id");
 		String pwd= request.getParameter("pwd");
 		System.out.println(">>> param "+id+"\t"+pwd);
+		
 		UserDTO param = new UserDTO(id, pwd);
-
-		UserVO user = service.loginService(param);
+		Object user = service.loginService(param);
+		System.out.println(">>> result " + ((UserVO)user));
 		View view= new View();
 		if(user != null) {
-			view.setPath("ok.jsp"); view.setSend(true);
+			// 세션을 생성하여 사용자의 상태정보를 유지하는 매커니즘..
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
+			
+			view.setPath("main.jsp"); view.setSend(true);
 		}else {
 			view.setPath("error.jsp"); view.setSend(true);
 		}
