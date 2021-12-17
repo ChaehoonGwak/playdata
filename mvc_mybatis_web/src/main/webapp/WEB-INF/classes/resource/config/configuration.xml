@@ -9,6 +9,8 @@
 						alias="user_dto"/>
 		<typeAlias type="encore.user.model.vo.UserVO"
 						alias="user_vo"/>
+		<typeAlias type="encore.bbs.model.vo.BbsVO"
+						alias="bbs_vo"/>
 	</typeAliases>
   
   <environments default="">

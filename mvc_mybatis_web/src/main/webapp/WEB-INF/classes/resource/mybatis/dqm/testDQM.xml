@@ -11,6 +11,19 @@
 			FROM USER_TBL
 			WHERE ID = #{id} AND PWD = #{pwd}
 		</select>
+		<insert id="insertRow"
+					parameterType="user_vo">
+			INSERT INTO USER_TBL
+			VALUES(#{id},#{pwd},#{name},#{point})
+		</insert>
+
+		<select id="listRow"
+					resultType="bbs_vo">
+			SELECT SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+			FROM BBS_TBL
+			ORDER BY SEQ DESC
+		</select>
+
 </mapper>
 
 
