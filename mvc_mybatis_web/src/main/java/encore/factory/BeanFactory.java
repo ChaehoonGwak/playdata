@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import encore.bbs.ctrl.ListCtrl;
+import encore.bbs.ctrl.PostCtrl;
+import encore.bbs.ctrl.PostForm;
+import encore.bbs.ctrl.ReadCtrl;
 import encore.ctrl.util.Controller;
 import encore.intro.ctrl.IndexCtrl;
 import encore.user.ctrl.JoinCtrl;
@@ -24,8 +27,10 @@ public class BeanFactory {
 		map.put("/pjt/logout.encore", new LogoutCtrl()) ;
 		map.put("/pjt/registerForm.encore", new RegisterCtrl()) ;
 		map.put("/pjt/register.encore", new JoinCtrl()) ;
-		map.put("/pjt/list.encore", new ListCtrl()) ;
-		
+		map.put("/pjt/bbs/list.encore", new ListCtrl()) ;
+		map.put("/pjt/bbs/postForm.encore", new PostForm()) ;
+		map.put("/pjt/bbs/post.encore", new PostCtrl()) ;
+		map.put("/pjt/bbs/read.encore", new ReadCtrl()) ;
 		
 	}
 	public static BeanFactory getInstance() {

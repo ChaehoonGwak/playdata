@@ -27,6 +27,7 @@
   
   	<mappers>
   		<mapper resource="resource/mybatis/dqm/testDQM.xml"/>
+  		<mapper resource="resource/mybatis/dqm/bbsDQM.xml"/>
   	</mappers>
   
 

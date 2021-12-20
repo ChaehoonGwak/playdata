@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import encore.bbs.model.vo.BbsVO;
+import encore.bbs.service.BbsService;
+import encore.bbs.service.BbsServiceImpl;
 import encore.ctrl.util.Controller;
 import encore.ctrl.view.View;
 import encore.user.service.UserService;
@@ -16,9 +18,9 @@ import encore.user.service.UserServiceImpl;
 
 public class ListCtrl implements Controller{
 	
-	private UserService service ;
+	private BbsService service ;
 	public ListCtrl() {
-		service = new UserServiceImpl();
+		service = new BbsServiceImpl();
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class ListCtrl implements Controller{
 //		session.setAttribute("boards" , list);
 		
 		request.setAttribute("boards", list);
-		view.setPath("list.jsp");
+		view.setPath("bbs_index.jsp");
 		view.setSend(true);
 		
 		return view;
