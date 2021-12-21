@@ -30,4 +30,16 @@ public class BbsServiceImpl implements BbsService{
 		return dao.selectRow(obj);
 	}
 
+	@Override
+	public int updateService(Object obj) {
+		System.out.println(">>> bbs service updateService");
+		return dao.updateRow(obj);
+	}
+
+	@Override
+	public int deleteService(Object obj) {
+		System.out.println(">>> bbs service deleteService");
+		return dao.deleteRow(obj);
+	}
+
 }

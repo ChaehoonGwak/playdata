@@ -52,12 +52,12 @@ body,td {
 			<td align=center colspan=2>
 				<hr size=1> 
 				<c:if test="${ loginUser.name == bbs.writer }">
-				[ <a href="">목 록</a> | 
-				  <a href="">수 정</a> | 
-				  <a href="">삭 제</a> ]<br>
+				[ <a href="list.encore">목 록</a>	| 
+				  <a href="updateForm.encore?seq=${ bbs.seq }">수 정</a>	| 
+				  <a href="delete.encore?seq=${ bbs.seq }">삭 제</a>	]<br>
 				</c:if>
 				<c:if test="${ loginUser.name != bbs.writer }">
-				[ <a href="">목 록</a> ]<br>
+				[ <a href="list.encore">목 록</a> ]<br>
 				</c:if>
 			</td>
 		</tr>
