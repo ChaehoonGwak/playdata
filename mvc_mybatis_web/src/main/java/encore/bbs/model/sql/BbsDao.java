@@ -8,5 +8,5 @@ public interface BbsDao {
 	public Object selectRow(Object obj);
 	public int updateRow(Object obj);
 	public int deleteRow(Object obj);
-
+	public List<Object> searchRow(Object obj);
 }

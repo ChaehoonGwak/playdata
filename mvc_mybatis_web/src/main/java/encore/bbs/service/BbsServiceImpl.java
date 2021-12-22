@@ -42,4 +42,10 @@ public class BbsServiceImpl implements BbsService{
 		return dao.deleteRow(obj);
 	}
 
+	@Override
+	public List<Object> searchService(Object obj) {
+		System.out.println(">>> bbs service searchService");
+		return dao.searchRow(obj);
+	}
+
 }

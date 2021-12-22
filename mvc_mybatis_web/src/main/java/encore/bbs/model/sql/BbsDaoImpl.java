@@ -41,6 +41,7 @@ public class BbsDaoImpl implements BbsDao{
 	@Override
 	public Object selectRow(Object obj) {
 		System.out.println(">>> dao selectRow");
+		//upCnt(obj);
 		return session.selectOne("encore.bbs.selectRow" ,  obj);
 	}
 
@@ -54,6 +55,17 @@ public class BbsDaoImpl implements BbsDao{
 	public int deleteRow(Object obj) {
 		System.out.println(">>> dao deleteRow");
 		return session.delete("encore.bbs.deleteRow" , obj);
+	}
+
+	private void upCnt(Object obj) {
+		System.out.println(">>> dao upCnt");
+		session.update("encore.bbs.upCnt" , obj);
+	}
+
+	@Override
+	public List<Object> searchRow(Object obj) {
+		System.out.println(">>> dao searchRow");
+		return session.selectList("encore.bbs.searchRow" , obj);
 	}
 
 }

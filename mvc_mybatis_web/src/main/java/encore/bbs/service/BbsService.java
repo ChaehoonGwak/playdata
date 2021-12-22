@@ -8,4 +8,5 @@ public interface BbsService {
 	public Object readService(Object obj);
 	public int updateService(Object obj);
 	public int deleteService(Object obj);
+	public List<Object> searchService(Object obj);
 }

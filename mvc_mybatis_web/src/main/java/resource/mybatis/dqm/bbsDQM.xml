@@ -43,6 +43,29 @@
 			DELETE FROM BBS_TBL
 			WHERE SEQ = #{seq}
 		</delete>
+		<update id="upCnt"
+					 parameterType="bbs_vo"
+					 flushCache="true">
+			UPDATE BBS_TBL
+			SET VIEWCNT = #{viewcnt}+1
+ 			WEHRE SEQ = #{seq}
+		</update>
+		<select id="searchRow"
+					parameterType="filter_vo"
+					resultType="bbs_vo">
+			SELECT SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+			FROM BBS_TBL
+			<where>
+				<if test="searchCondition == 'subject' ">
+					SUBJECT LIKE '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchCondition == 'content' ">
+					CONTENT LIKE '%'||#{searchKeyword}||'%'
+				</if>
+			</where>
+			ORDER BY SEQ DESC
+		</select>
+		
 </mapper>
 
 
