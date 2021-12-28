@@ -343,7 +343,7 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="oooooo"><i class="fa fa-circle-o"></i>게시판</a></li>
+                <li><a href="bbs_list"><i class="fa fa-circle-o"></i>게시판</a></li>
                 <li><a href="/resources/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
               </ul>
             </li>

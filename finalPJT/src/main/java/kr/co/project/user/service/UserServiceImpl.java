@@ -12,7 +12,7 @@ import kr.co.project.user.model.sql.UserDao;
 public class UserServiceImpl implements UserService {
 	
 	@Resource(name="userD")
-	private UserDao dao ; 
+	private UserDao dao ;
 	
 	@Override
 	public Object loginService(Object obj) {

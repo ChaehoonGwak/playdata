@@ -3,7 +3,81 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="encore.project">
+<mapper namespace="encore.project.bbs">
+	<select id="listRow"
+				resultType="bbs_vo"
+				flushCache="true"
+				useCache="true">
+		SELECT	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		FROM	BBS_TBL
+		ORDER BY	SEQ DESC
+	</select>
+	
+	<insert id="insertRow"
+			parameterType="bbs_vo">
+		INSERT INTO BBS_TBL
+		VALUES(	BBS_SEQ.NEXTVAL , 
+				#{subject},
+				#{content},
+				#{writer},
+				SYSDATE,
+				0)
+	</insert>
+	
+	<select id="selectRow"
+			parameterType="bbs_vo"
+			resultType="bbs_vo"
+			flushCache="true" 
+			useCache="true" >
+		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		FROM	BBS_TBL
+		WHERE	SEQ = #{seq}
+	</select>
+	
+	<update id="updateRow"
+			parameterType="bbs_vo"
+			flushCache="true" >
+		UPDATE 	BBS_TBL
+		SET		SUBJECT = #{subject} , CONTENT = #{content}
+		WHERE	SEQ = #{seq}
+	</update>
+	
+	<delete id="deleteRow"
+			parameterType="bbs_vo"
+			flushCache="true" >
+		DELETE 	FROM BBS_TBL
+		WHERE	SEQ = #{seq}
+	</delete>
+	
+	<update id="upCnt"
+					 parameterType="bbs_vo"
+					 flushCache="true">
+			UPDATE BBS_TBL
+			SET VIEWCNT = VIEWCNT + 1
+ 			WHERE SEQ = #{seq}
+		</update>
+	
+	<select id="searchRow"
+			parameterType="filter_vo"
+			resultType="bbs_vo"
+			flushCache="true"
+			useCache="true"> 
+		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		FROM	BBS_TBL
+		<where>
+			<if test="searchCondition == 'subject' ">
+				SUBJECT  LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'content' ">
+				CONTENT LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'writer' ">
+				WRITER LIKE '%'||#{searchKeyword}||'%'
+			</if>
+		</where>
+		ORDER BY SEQ DESC
+	</select>
+	
 
 </mapper>  
 

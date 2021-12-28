@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
+<%@ page 	language="java" 
+			contentType="text/html; charset=UTF-8"
+			pageEncoding="UTF-8"%>
+
+<%@ taglib 	uri="http://java.sun.com/jsp/jstl/core" 
+			prefix="c"%>
 
 <%@include file="./include/header.jsp"%>
 
@@ -12,7 +13,28 @@
 		<!-- left column -->
 		<div class="col-md-12">
 			<!-- general form elements -->
-
+			
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">New Board</h3>
+				</div>
+				
+				<div class="box-body">
+					<!-- ajax 통신을 위한 검색기능 -->
+					<select id="searchCondition">
+						<option value="subject">제 목</option>
+						<option value="writer">작성자</option>
+						<option value="content">내 용</option>
+					</select>
+					<input type="text" id="searchKeyword" />
+					<button id="searchBtn">Search</button>
+					
+					<button id="newBtn">New Board</button>
+					
+				</div>
+			</div>
+			
+						
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">LIST ALL PAGE</h3>
@@ -29,15 +51,17 @@
 	</tr>
 
 
-
-	<tr>
-		<td>oooo</td>
-		<td><a href="#">oooo</a></td>
-		<td>oooo</td>
-		<td>oooo</td>
-		<td><span class="badge bg-red">oooo</span></td>
-	</tr>
-
+	<tbody id="tbody">
+		<c:forEach items="${boards}" var="bbs">
+		<tr>
+			<td>${bbs.seq }</td>
+			<td><a href="bbs_read?seq=${bbs.seq}">${bbs.subject }</a></td>
+			<td>${bbs.writer }</td>
+			<td>${bbs.regdate }</td>
+			<td><span class="badge bg-red">${bbs.viewcnt }</span></td>
+		</tr>
+		</c:forEach>
+	</tbody>
 
 </table>
 
@@ -57,13 +81,37 @@
 <!-- /.content-wrapper -->
 
 <script>
-	$(document).ready(function(){
-		$("#newBtn").click(function(){
+	$(document).ready(function() {
+		$("#newBtn").click(function() {
 			//alert("btn click")
-			loctaion.href="bbs_registerForm";
+			location.href="bbs_registerForm";
+		});
+		
+		// ajax 통신 처리 버튼
+		$("#searchBtn").click(function() {
+			alert("btn click")
+			$.ajax({
+				url  : "bbs_search" , 
+				type : "post" ,
+				data : { searchCondition : $("#searchCondition").val() , 
+					     searchKeyword   : $("#searchKeyword").val() } , 
+				dataType : "json" , 
+				success  : function(data) {
+					$("#tbody").empty();
+					$.each(data, function(idx, obj) {
+						alert(obj.subject);
+					}) 
+				}
+			})
 		});
 	})
-
 </script>
 
 <%@include file="./include/footer.jsp"%>
+
+
+
+
+
+
+
