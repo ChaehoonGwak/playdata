@@ -89,18 +89,27 @@
 		
 		// ajax 통신 처리 버튼
 		$("#searchBtn").click(function() {
-			alert("btn click")
+			//alert("btn click")
 			$.ajax({
 				url  : "bbs_search" , 
 				type : "post" ,
-				data : { searchCondition : $("#searchCondition").val() , 
-					     searchKeyword   : $("#searchKeyword").val() } , 
+				data : { 	searchCondition : $("#searchCondition").val() , 
+					     		searchKeyword   : $("#searchKeyword").val() } , 
 				dataType : "json" , 
 				success  : function(data) {
 					$("#tbody").empty();
-					$.each(data, function(idx, obj) {
-						alert(obj.subject);
-					}) 
+					trs = "";
+					$.each(data , function(idx, obj) {
+						trs +="<tr>"
+						trs +="<td align=center>"+obj.seq+"</td>"
+						trs +="<td align=center>"+obj.writer+"</td>"
+						trs +="<td><a href='bbs_read?seq="+obj.seq+"'>"+obj.subject+"</a></td>"
+						trs +="<td align=center>"+obj.regdate+"</td>"
+						trs +="<td align=center>"+obj.viewcnt+"</td>"
+						trs +="</tr>"
+					})
+					//alert(trs) ; 
+					$("#tbody").html(trs);
 				}
 			})
 		});
@@ -108,10 +117,3 @@
 </script>
 
 <%@include file="./include/footer.jsp"%>
-
-
-
-
-
-
-

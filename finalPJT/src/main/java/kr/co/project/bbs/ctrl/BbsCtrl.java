@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.project.bbs.model.vo.BbsVO;
 import kr.co.project.bbs.model.vo.FilterVO;
@@ -22,7 +23,7 @@ public class BbsCtrl {
 	
 	@RequestMapping(value = "bbs_list", method = RequestMethod.GET)
 	public String list(Model model) {
-		System.out.println(">>>> bbs ctrl list");
+		System.out.println(">>> bbs ctrl list");
 		List<Object> list = service.listService();
 		model.addAttribute("boards", list);
 		
@@ -31,7 +32,7 @@ public class BbsCtrl {
 	
 	@RequestMapping(value = "bbs_read", method = RequestMethod.GET)
 	public String read(BbsVO obj, Model model) {
-		System.out.println(">>>> bbs ctrl read");
+		System.out.println(">>> bbs ctrl read");
 		Object bbs = service.readService(obj);
 		model.addAttribute("bbs", bbs);
 		
@@ -39,13 +40,13 @@ public class BbsCtrl {
 	}
 	@RequestMapping(value = "bbs_registerForm", method = RequestMethod.GET)
 	public String registerForm() {
-		System.out.println(">>>> bbs ctrl registerForm");
+		System.out.println(">>> bbs ctrl registerForm");
 		
 		return "register";
 	}
 	@RequestMapping(value = "bbs_register", method = RequestMethod.POST)
 	public String register(BbsVO obj) {
-		System.out.println(">>>> bbs ctrl register");
+		System.out.println(">>> bbs ctrl register");
 		int flag = service.postService(obj);
 		
 		return "redirect:/bbs_list";
@@ -65,11 +66,20 @@ public class BbsCtrl {
 		
 		return "redirect:/bbs_list";
 	}
+	@RequestMapping(value = "bbs_remove"  , method = RequestMethod.GET)
+	public String remove(BbsVO bbs) {
+		System.out.println(">>> bbs ctrl remove");
+		int flag = service.deleteService(bbs);
+		
+		return "redirect:/bbs_list";
+	}
 	@RequestMapping(value = "bbs_search", method = RequestMethod.POST)
+	@ResponseBody
 	public List<Object> search(FilterVO search) {
-		System.out.println(">>>> bbs ctrl search");
+		System.out.println(">>> bbs ctrl search");
 		System.out.println(">>> param data "+search);
 		List<Object> list = service.searchService(search);
+		
 		return list;
 	}
 
