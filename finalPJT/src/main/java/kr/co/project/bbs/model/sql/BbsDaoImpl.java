@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.project.bbs.model.vo.BbsVO;
+import kr.co.project.bbs.model.vo.ReplyVO;
 
 @Repository("bbsD")
 public class BbsDaoImpl implements BbsDao{
@@ -31,7 +32,11 @@ public class BbsDaoImpl implements BbsDao{
 	public Object selectRow(Object obj) {
 		System.out.println(">>> dao selectRow");
 		upCnt(obj);
-		return session.selectOne("encore.project.bbs.selectRow", obj);
+		BbsVO bbs = session.selectOne("encore.project.bbs.selectRow", obj);
+		
+		List<ReplyVO> rlist = session.selectList("encore.project.bbs.replyRow", obj);
+		bbs.setRlist(rlist);
+		return bbs;
 	}
 
 	@Override
@@ -59,8 +64,9 @@ public class BbsDaoImpl implements BbsDao{
 
 	@Override
 	public List<Object> replyPostRow(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(">>> dao replyPostRow");
+		session.insert("encore.project.bbs.replyPostRow", obj);
+		return session.selectList("encore.project.bbs.replyRow", obj);
 	}
 
 	@Override

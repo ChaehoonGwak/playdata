@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.project.bbs.model.vo.BbsVO;
 import kr.co.project.bbs.model.vo.FilterVO;
+import kr.co.project.bbs.model.vo.ReplyVO;
 import kr.co.project.bbs.service.BbsService;
 
 @Controller
@@ -81,6 +82,16 @@ public class BbsCtrl {
 		List<Object> list = service.searchService(search);
 		
 		return list;
+	}
+	
+	@RequestMapping(value = "bbs_replyPost", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> replyPost(ReplyVO reply) {
+		System.out.println(">>> bbs ctrl replyPost");
+		System.out.println(">>> param data "+reply);
+		List<Object> rlist = service.replyPostService(reply);
+		
+		return rlist;
 	}
 
 }

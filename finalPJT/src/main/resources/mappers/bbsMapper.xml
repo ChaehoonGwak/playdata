@@ -78,6 +78,25 @@
 		ORDER BY SEQ DESC
 	</select>
 	
+	<select id="replyRow"
+			parameterType="bbs_vo"
+			resultType="reply_vo"
+			flushCache="true" 
+			useCache="true" >
+		SELECT 	RSEQ, SEQ, RWRITER, RCONTENT, RDATE
+		FROM	REPLY_TBL
+		WHERE	SEQ = #{seq}
+	</select>
+	
+	<insert id="replyPostRow"
+			parameterType="reply_vo">
+		INSERT INTO REPLY_TBL
+		VALUES(	RSEQ.NEXTVAL , 
+				#{seq},
+				#{rwriter},
+				#{rcontent},
+				SYSDATE)
+	</insert>
 
 </mapper>  
 

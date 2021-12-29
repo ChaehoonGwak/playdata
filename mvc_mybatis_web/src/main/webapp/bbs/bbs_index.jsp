@@ -78,7 +78,7 @@
 				success  : function(data) {
 					//alert(data);
 					$("#tbody").empty();
-					trs = ""
+					trs = "";
 					$.each(data , function(idx, obj) {
 						trs +="<tr>"
 						trs +="<td align=center>"+obj.seq+"</td>"

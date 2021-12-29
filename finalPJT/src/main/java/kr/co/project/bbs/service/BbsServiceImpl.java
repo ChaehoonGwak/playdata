@@ -52,13 +52,13 @@ public class BbsServiceImpl implements BbsService{
 
 	@Override
 	public List<Object> replyPostService(Object obj) {
-		System.out.println(">>> bbs service ");
-		return null;
+		System.out.println(">>> bbs service replyPostService");
+		return dao.replyPostRow(obj);
 	}
 
 	@Override
 	public List<Object> replyDeleterService(Object obj) {
-		System.out.println(">>> bbs service ");
+		System.out.println(">>> bbs service replyDeleterService");
 		return null;
 	}
 

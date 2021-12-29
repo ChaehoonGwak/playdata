@@ -54,6 +54,59 @@
 	<button type="button" id="listBtn" class="btn btn-primary">LIST ALL</button>
 </div>
 
+<div class="row">
+		<div class="col-md-12">
+			<div class="box box-success">
+				<div class="box-header">
+					<h3 class="box-title">ADD NEW REPLY</h3>
+				</div>
+				<div class="box-body">
+					<label for="exampleInputEmail1">Writer</label>
+					<input class="form-control" 
+					type="text" 
+					placeholder="USER ID"    
+					id="newReplyWriter"
+					value="${loginUser.name }"
+					readonly>
+					<label for="exampleInputEmail1">Reply Text</label>
+					<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+				</div>
+			</div>
+		
+		<!-- The time line -->
+		<ul class="timeline">
+		  	<!-- timeline time label -->
+			<li class="time-label" id="repliesDiv">
+			  <span class="bg-green">
+			    Replies List <small id='replycntSmall'> [ 000 ] </small>
+			  </span>
+			</li>
+		</ul>
+		<!--  -->
+		<ul id="rlist">
+				<c:forEach items="${bbs.rlist}" var="reply">
+				
+					<li class="time-label">	
+						${reply.rseq }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						${reply.rwriter }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						${reply.rcontent}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="ooooo">X</a>
+					</li>
+				</c:forEach>
+		</ul>
+		<!--  -->
+			<div class='text-center'>
+				<ul id="pagination" class="pagination pagination-sm no-margin ">
+				</ul>
+			</div>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
 
 <script>
 	$(document).ready(function(){
@@ -65,6 +118,33 @@
 		});
 		$("#removeBtn").click(function() {
 			location.href="bbs_remove?seq="+$("#seq").val() ;
+		});
+		$("#replyAddBtn").click(function(){
+			//alert("btn click")
+			
+			$.ajax({
+				url  : "bbs_replyPost" , 
+				type : "post" ,
+				data : {
+					     	seq  : $("#seq").val() ,
+					     	rwriter : $("#newReplyWriter").val() ,
+					     	rcontent : $("#newReplyText").val() } , 
+				dataType : "json" , 
+				success  : function(data) {
+					$("#rlist").empty();
+					lis = "";
+					$.each(data, function(idx, obj) {
+						lis += "<li class='time-label'>"
+						lis += obj.rseq+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += obj.rwriter+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += obj.rcontent+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += "<a href='ooooo'>"+'X'+"</a>"
+						lis += "</li>"
+					}) 
+					$("#rlist").html(lis);
+				}
+			})
+
 		});
 	});
 </script>
