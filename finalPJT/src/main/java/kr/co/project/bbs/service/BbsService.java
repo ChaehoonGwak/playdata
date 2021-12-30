@@ -11,5 +11,5 @@ public interface BbsService {
 	
 	public List<Object> searchService(Object obj);
 	public List<Object> replyPostService(Object obj);
-	public List<Object> replyDeleterService(Object obj);
+	public List<Object> replyDeleteService(Object obj);
 }

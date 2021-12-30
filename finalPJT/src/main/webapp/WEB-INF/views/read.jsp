@@ -89,13 +89,21 @@
 		<!--  -->
 		<ul id="rlist">
 				<c:forEach items="${bbs.rlist}" var="reply">
-				
-					<li class="time-label">	
-						${reply.rseq }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						${reply.rwriter }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						${reply.rcontent}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="ooooo">X</a>
-					</li>
+					<c:if test="${reply.rwriter == loginUser.name}">
+						<li class="time-label">	
+							${reply.rseq }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							${reply.rwriter }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							${reply.rcontent}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="javascript:removeReply(${reply.rseq })">X</a>
+						</li>
+					</c:if>
+					<c:if test="${reply.rwriter != loginUser.name}">
+						<li class="time-label">	
+							${reply.rseq }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							${reply.rwriter }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							${reply.rcontent}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</li>
+					</c:if>
 				</c:forEach>
 		</ul>
 		<!--  -->
@@ -109,6 +117,36 @@
 	<!-- /.row -->
 
 <script>
+	function removeReply(rseq){
+		$.ajax({
+			url  : "bbs_replyDelete" , 
+			type : "post" ,
+			data : {	rseq  : rseq ,
+						seq  : $("#seq").val() } , 
+			dataType : "json" , 
+			success  : function(data) {
+				$("#rlist").empty();
+				lis = "";
+				$.each(data, function(idx, obj) {
+					if(obj.rwriter == "${loginUser.name}"){
+					lis += "<li class='time-label'>"
+					lis += obj.rseq+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					lis += obj.rwriter+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					lis += obj.rcontent+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					lis += "<a href='javascript:removeReply("+obj.rseq+")'>X</a>"
+					lis += "</li>"
+					}else{
+						lis += "<li class='time-label'>"
+						lis += obj.rseq+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += obj.rwriter+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += obj.rcontent+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+						lis += "</li>"
+					}
+				}) 
+				$("#rlist").html(lis);
+			}
+		})
+	}
 	$(document).ready(function(){
 		$("#listBtn").click(function() {
 			location.href="bbs_list";
@@ -125,8 +163,7 @@
 			$.ajax({
 				url  : "bbs_replyPost" , 
 				type : "post" ,
-				data : {
-					     	seq  : $("#seq").val() ,
+				data : {	seq  : $("#seq").val() ,
 					     	rwriter : $("#newReplyWriter").val() ,
 					     	rcontent : $("#newReplyText").val() } , 
 				dataType : "json" , 
@@ -134,12 +171,20 @@
 					$("#rlist").empty();
 					lis = "";
 					$.each(data, function(idx, obj) {
+						if(obj.rwriter == "${loginUser.name}"){
 						lis += "<li class='time-label'>"
 						lis += obj.rseq+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 						lis += obj.rwriter+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 						lis += obj.rcontent+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-						lis += "<a href='ooooo'>"+'X'+"</a>"
+						lis += "<a href='javascript:removeReply("+obj.rseq+")'>X</a>"
 						lis += "</li>"
+						}else{
+							lis += "<li class='time-label'>"
+							lis += obj.rseq+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							lis += obj.rwriter+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							lis += obj.rcontent+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							lis += "</li>"
+						}
 					}) 
 					$("#rlist").html(lis);
 				}

@@ -57,9 +57,9 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public List<Object> replyDeleterService(Object obj) {
-		System.out.println(">>> bbs service replyDeleterService");
-		return null;
+	public List<Object> replyDeleteService(Object obj) {
+		System.out.println(">>> bbs service replyDeleteService");
+		return dao.replyDeleteRow(obj);
 	}
 
 }

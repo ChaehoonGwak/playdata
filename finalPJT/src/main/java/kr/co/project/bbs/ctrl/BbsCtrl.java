@@ -83,13 +83,21 @@ public class BbsCtrl {
 		
 		return list;
 	}
-	
 	@RequestMapping(value = "bbs_replyPost", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Object> replyPost(ReplyVO reply) {
 		System.out.println(">>> bbs ctrl replyPost");
 		System.out.println(">>> param data "+reply);
 		List<Object> rlist = service.replyPostService(reply);
+		
+		return rlist;
+	}
+	@RequestMapping(value = "bbs_replyDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> replyDelete(ReplyVO reply) {
+		System.out.println(">>> bbs ctrl replyDelete");
+		System.out.println(">>> param data "+reply);
+		List<Object> rlist = service.replyDeleteService(reply);
 		
 		return rlist;
 	}

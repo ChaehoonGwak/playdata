@@ -86,9 +86,10 @@
 		SELECT 	RSEQ, SEQ, RWRITER, RCONTENT, RDATE
 		FROM	REPLY_TBL
 		WHERE	SEQ = #{seq}
+		ORDER BY	RSEQ DESC
 	</select>
 	
-	<insert id="replyPostRow"
+	<insert id="replyInsertRow"
 			parameterType="reply_vo">
 		INSERT INTO REPLY_TBL
 		VALUES(	RSEQ.NEXTVAL , 
@@ -97,6 +98,13 @@
 				#{rcontent},
 				SYSDATE)
 	</insert>
+	
+	<delete id="replyDeleteRow"
+			parameterType="reply_vo"
+			flushCache="true">
+		DELETE 	FROM REPLY_TBL
+		WHERE	RSEQ = #{rseq}
+	</delete>
 
 </mapper>  
 

@@ -65,14 +65,17 @@ public class BbsDaoImpl implements BbsDao{
 	@Override
 	public List<Object> replyPostRow(Object obj) {
 		System.out.println(">>> dao replyPostRow");
-		session.insert("encore.project.bbs.replyPostRow", obj);
+		int flag = session.insert("encore.project.bbs.replyInsertRow", obj);
+		System.out.println(">>> dao reply insert "+flag);
 		return session.selectList("encore.project.bbs.replyRow", obj);
 	}
 
 	@Override
 	public List<Object> replyDeleteRow(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(">>> dao replyDeleteRow");
+		int flag = session.delete("encore.project.bbs.replyDeleteRow", obj);
+		System.out.println(">>> dao reply delete "+flag);
+		return session.selectList("encore.project.bbs.replyRow", obj);
 	}
 
 }
