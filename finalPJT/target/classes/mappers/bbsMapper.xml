@@ -8,7 +8,7 @@
 				resultType="bbs_vo"
 				flushCache="true"
 				useCache="true">
-		SELECT	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		SELECT	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT, RECOMM, NOTRECOMM
 		FROM	BBS_TBL
 		ORDER BY	SEQ DESC
 	</select>
@@ -21,6 +21,8 @@
 				#{content},
 				#{writer},
 				SYSDATE,
+				0,
+				0,
 				0)
 	</insert>
 	
@@ -29,7 +31,7 @@
 			resultType="bbs_vo"
 			flushCache="true" 
 			useCache="true" >
-		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT, RECOMM, NOTRECOMM
 		FROM	BBS_TBL
 		WHERE	SEQ = #{seq}
 	</select>
@@ -62,7 +64,7 @@
 			resultType="bbs_vo"
 			flushCache="true"
 			useCache="true"> 
-		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+		SELECT 	SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT, RECOMM, NOTRECOMM
 		FROM	BBS_TBL
 		<where>
 			<if test="searchCondition == 'subject' ">

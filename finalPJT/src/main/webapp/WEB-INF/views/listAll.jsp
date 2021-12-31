@@ -58,6 +58,7 @@
 			<td><a href="bbs_read?seq=${bbs.seq}">${bbs.subject }</a></td>
 			<td>${bbs.writer }</td>
 			<td>${bbs.regdate }</td>
+			<td>${bbs.recomm }</td>
 			<td><span class="badge bg-red">${bbs.viewcnt }</span></td>
 		</tr>
 		</c:forEach>
