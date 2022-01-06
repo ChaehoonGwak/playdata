@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias 	type="kr.co.project.user.model.vo.UserDTO"
+					alias="user_dto"/>
+		<typeAlias 	type="kr.co.project.user.model.vo.UserVO"
+					alias="user_vo"/>			
+		<typeAlias 	type="kr.co.project.bbs.model.vo.BbsVO"
+					alias="bbs_vo"/>
+		<typeAlias 	type="kr.co.project.bbs.model.vo.FilterVO"
+					alias="filter_vo"/>
+		<typeAlias 	type="kr.co.project.bbs.model.vo.ReplyVO"
+					alias="reply_vo"/>
+					
+	</typeAliases>
+</configuration>
+

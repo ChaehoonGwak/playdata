@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="encore.user">
+		<select id="loginRow"
+					parameterType="user_dto"
+					resultType="user_vo">
+			SELECT ID, PWD, NAME, POINT
+			FROM USER_TBL
+			WHERE ID = #{id} AND PWD = #{pwd}
+		</select>
+		<insert id="insertRow"
+					parameterType="user_vo">
+			INSERT INTO USER_TBL
+			VALUES(#{id},#{pwd},#{name},#{point})
+		</insert>
+
+		<select id="listRow"
+					resultType="bbs_vo">
+			SELECT SEQ, SUBJECT, CONTENT, WRITER, REGDATE, VIEWCNT
+			FROM BBS_TBL
+			ORDER BY SEQ DESC
+		</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
